@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2018 Google Inc.
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,20 @@
  * limitations under the License.
  */
 
-namespace Google\Cloud\Core\Tests\Unit;
+namespace Google\Cloud\Core\Tests\Unit\Batch\Fixtures;
 
-//@codingStandardsIgnoreStart
-class Fixtures
+class TestSerializableObjectWithClosure
 {
-    public static function JSON_KEY_FIXTURE()
+    public $closure;
+
+    public function __construct()
     {
-        return __DIR__ . '/fixtures/json-key-fixture.json';
+        $this->closure = function () {
+            return;
+        };
     }
 
-    public static function SERVICE_FIXTURE()
+    public function callback()
     {
-        return __DIR__ . '/fixtures/service-fixture.json';
     }
 }
-//@codingStandardsIgnoreEnd
