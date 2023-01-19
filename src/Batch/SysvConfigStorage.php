@@ -68,7 +68,7 @@ class SysvConfigStorage implements ConfigStorageInterface
             $this->project = self::DEFAULT_PROJECT;
         }
         $this->sysvKey = ftok(__FILE__, $this->project);
-        $this->semid = sem_get($this->sysvKey, 1, $this->perm, 1);
+        $this->semid = sem_get($this->sysvKey, 1, $this->perm, true);
     }
 
     /**
