@@ -209,12 +209,14 @@ trait ClientTrait
             }
         }
 
-        if (getenv('GOOGLE_CLOUD_PROJECT')) {
-            return getenv('GOOGLE_CLOUD_PROJECT');
+        $path = $_ENV['GOOGLE_CLOUD_PROJECT'];
+        if (isset($path) && !empty($path)) {
+            return $path;
         }
 
-        if (getenv('GCLOUD_PROJECT')) {
-            return getenv('GCLOUD_PROJECT');
+        $path = $_ENV['GCLOUD_PROJECT'];
+        if (isset($path) && !empty($path)) {
+            return $path;
         }
 
         if ($this->onGce($config['httpHandler'])) {
