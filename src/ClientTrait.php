@@ -209,13 +209,20 @@ trait ClientTrait
             }
         }
 
-        $path = $_ENV['GOOGLE_CLOUD_PROJECT'];
-        if (isset($path) && !empty($path)) {
-            return $path;
+        $path = getenv('GOOGLE_CLOUD_PROJECT');
+        if (!$path) {
+            $path = getenv('GCLOUD_PROJECT');
         }
 
-        $path = $_ENV['GCLOUD_PROJECT'];
-        if (isset($path) && !empty($path)) {
+        if (!$path) {
+            if (isset($_ENV['GOOGLE_CLOUD_PROJECT']) && !empty($_ENV['GOOGLE_CLOUD_PROJECT'])) {
+                $path = $_ENV['GOOGLE_CLOUD_PROJECT'];
+            } else if (isset($_ENV['GCLOUD_PROJECT']) && !empty($_ENV['GCLOUD_PROJECT'])) {
+                $path = $_ENV['GCLOUD_PROJECT'];
+            }
+        }
+
+        if ($path) {
             return $path;
         }
 
