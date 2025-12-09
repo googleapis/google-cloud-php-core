@@ -169,7 +169,7 @@ class RequestWrapper
         $this->restOptions = $config['restOptions'];
         $this->shouldSignRequest = $config['shouldSignRequest'];
         $this->retryFunction = $config['restRetryFunction'] ?: $this->getRetryFunction();
-        $this->retryListener = $config['restRetryListener'] ;
+        $this->retryListener = $config['restRetryListener'];
         $this->delayFunction = $config['restDelayFunction'] ?: function ($delay) {
             usleep($delay);
         };
@@ -372,7 +372,7 @@ class RequestWrapper
      */
     private function addAuthHeaders(RequestInterface $request, FetchAuthTokenInterface $fetcher)
     {
-        $backoff = new ExponentialBackoff($this->retries, $this->getRetryFunction());
+        $backoff = new ExponentialBackoff($this->retries, $this->getRetryFunction(), $this->retryListener);
 
         try {
             return $backoff->execute(
